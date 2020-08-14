@@ -1,6 +1,6 @@
 # Multi-Strategy-Enhanced-Whale-Optimization-Algorithm
 
-I combine with MSWOA and EWOA.
+### I combine with MSWOA and EWOA.
 It's mean I take MSWOA's [Initialization Strategy] and [Modified Spiral Updating Position Strategy] to put into EWOA.
 Compare with WOA, Rosenbrock has improve 805%
 
