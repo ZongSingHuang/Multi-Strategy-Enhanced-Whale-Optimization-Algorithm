@@ -1,8 +1,8 @@
 # Multi-Strategy-Enhanced-Whale-Optimization-Algorithm
 
-[1]. I combine with MSWOA and EWOA.
-[2]. It's mean I take MSWOA's [Initialization Strategy] and [Modified Spiral Updating Position Strategy] to put into EWOA.
-[3]. Compare with WOA, Rosenbrock has improve 805%
+I combine with MSWOA and EWOA.
+It's mean I take MSWOA's [Initialization Strategy] and [Modified Spiral Updating Position Strategy] to put into EWOA.
+Compare with WOA, Rosenbrock has improve 805%
 
 PAPER:
 WOA, Mirjalili, S., & Lewis, A. (2016). The Whale Optimization Algorithm. Advances in Engineering Software, 95, 51–67. doi:10.1016/j.advengsoft.2016.01.008
