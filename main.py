@@ -91,11 +91,11 @@ def Griewank(x):
     return left - right + 1
 
 
-d = 50
+d = 30
 g = 3000
 p = 20
 times = 30
-strategy_init = True
+strategy_init = False
 strategy_bound = True
 table = np.zeros((4, 11))
 table[2, :] = -np.ones(11)*np.inf
