@@ -84,7 +84,7 @@ class MSEWOA():
                 bound_max_map = bound_max[idx_too_high] + \
                                 R5*bound_max[idx_too_high]*(bound_max[idx_too_high]-self.X[idx_too_high])/self.X[idx_too_high]
                 bound_min_map = bound_min[idx_too_low] + \
-                                R6*np.abs(bound_min[idx_too_low]*(bound_min[idx_too_low]-self.X[idx_too_low])/self.X[idx_too_low])
+                                R6*np.abs(bound_min[idx_too_low]*(bound_min[idx_too_low]-self.X[idx_too_low]))/np.abs(self.X[idx_too_low])
                 if np.any(bound_max_map==np.inf) or np.any(bound_min_map==np.inf):                   
                     print(123)                
                 self.X[idx_too_high] = bound_max_map.copy()
