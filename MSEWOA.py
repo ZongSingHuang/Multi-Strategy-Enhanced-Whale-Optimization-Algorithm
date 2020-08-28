@@ -64,8 +64,7 @@ class MSEWOA():
         
         while(self._iter<self.max_iter):
             a = self.a_max - (self.a_max-self.a_min)*(self._iter/self.max_iter)
-            a2 = self.a2_max - (self.a2_max-self.a2_min)*(self._iter/self.max_iter)            
-                   
+            a2 = self.a2_max - (self.a2_max-self.a2_min)*(self._iter/self.max_iter)               
             for i in range(self.num_particle):
                 p = np.random.uniform()
                 R1 = np.random.uniform()
@@ -76,13 +75,12 @@ class MSEWOA():
                 C = 2*R2
                 l = (a2-1)*np.random.uniform() + 1
                 self.b = np.random.randint(low=0, high=500)
-                
-                
+                                
                 # case3-2. 改善速度
                 if p>=0.5:
-                    # (5)
+                    (5)
                     D = np.abs(self.gBest_X - self.X[i, :])
-                    self.X[i, :] = D*np.exp(self.b*l)*np.cos(2*np.pi*l)+self.gBest_X                    
+                    self.X[i, :] = D*np.exp(self.b*l)*np.cos(2*np.pi*l)+self.gBest_X
                 else:
                     # (4)
                     D = C*self.gBest_X - self.X[i, :]
