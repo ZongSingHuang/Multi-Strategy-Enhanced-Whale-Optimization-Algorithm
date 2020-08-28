@@ -41,6 +41,7 @@ class MSEWOA():
         self.gBest_score = np.inf
         self.gBest_curve = np.zeros(self.max_iter)
         self.X = np.random.uniform(size=[self.num_particle, self.num_dim])*(self.x_max-self.x_min) + self.x_min           
+        self.chaotic()
         
         if self.strategy_obl==True:
             new_X = self.obl()
@@ -55,7 +56,7 @@ class MSEWOA():
         self.gBest_score = score.min().copy()
         self.gBest_X = self.X[score.argmin()].copy()
         self.gBest_curve[0] = self.gBest_score.copy()
-        self.chaotic()   
+           
         
     def opt(self):
         bound_max = np.dot(np.ones(self.num_particle)[:, np.newaxis], self.x_max[np.newaxis, :])
@@ -85,7 +86,7 @@ class MSEWOA():
                 else:
                     # (4)
                     D = C*self.gBest_X - self.X[i, :]
-                    self.X[i, :] = D*np.cos(2*np.pi*l)+self.gBest_X  
+                    self.X[i, :] = self.gBest_X - D*np.cos(2*np.pi*l)
 
             if self.strategy_bound==True:
                 idx_too_high = bound_max < self.X
