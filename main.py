@@ -333,7 +333,7 @@ def u_xakm(x, a, k, m):
 d = 30
 g = 500
 p = 30
-times = 50
+times = 5
 strategy_init = True
 strategy_bound = True
 strategy_obl = True

@@ -43,15 +43,7 @@ class MSEWOA():
         self.X = np.random.uniform(size=[self.num_particle, self.num_dim])*(self.x_max-self.x_min) + self.x_min           
         self.chaotic()
         
-        if self.strategy_obl==True:
-            new_X = self.obl()
-            self.X = np.concatenate((new_X, self.X), axis=0)        
-            score = self.fit_func(self.X)
-            top_k = score.argsort()[:self.num_particle]
-            score = score[top_k].copy()
-            self.X = self.X[top_k].copy()
-        else:
-            score = self.fit_func(self.X)
+        score = self.obl()
         
         self.gBest_score = score.min().copy()
         self.gBest_X = self.X[score.argmin()].copy()
@@ -69,8 +61,6 @@ class MSEWOA():
                 p = np.random.uniform()
                 R1 = np.random.uniform()
                 R2 = np.random.uniform()
-                R5 = np.random.uniform()
-                R6 = np.random.uniform()
                 A = 2*a*R1 - a
                 C = 2*R2
                 l = (a2-1)*np.random.uniform() + 1
@@ -86,30 +76,10 @@ class MSEWOA():
                     D = C*self.gBest_X - self.X[i, :]
                     self.X[i, :] = self.gBest_X - D*np.cos(2*np.pi*l)
 
-            if self.strategy_bound==True:
-                idx_too_high = bound_max < self.X
-                idx_too_low = bound_min > self.X
-                bound_max_map = bound_max[idx_too_high] + \
-                                R5*bound_max[idx_too_high]*(bound_max[idx_too_high]-self.X[idx_too_high])/self.X[idx_too_high]
-                bound_min_map = bound_min[idx_too_low] + \
-                                R6*np.abs(bound_min[idx_too_low]*(bound_min[idx_too_low]-self.X[idx_too_low]))/np.abs(self.X[idx_too_low])
-                if np.any(bound_max_map==np.inf) or np.any(bound_min_map==np.inf):                   
-                    print(123)                
-                self.X[idx_too_high] = bound_max_map.copy()
-                self.X[idx_too_low] = bound_min_map.copy()
-            else:
-                self.X[self.X>bound_max] = bound_max[self.X>bound_max]
-                self.X[self.X<bound_min] = bound_max[self.X<bound_min]
-
-            if self.strategy_obl==True:
-                new_X = self.obl()
-                self.X = np.concatenate((new_X, self.X), axis=0)            
-                score = self.fit_func(self.X)
-                top_k = score.argsort()[:self.num_particle]
-                score = score[top_k].copy()
-                self.X = self.X[top_k].copy()
-            else:
-                score = self.fit_func(self.X)
+            self.bound(bound_max, bound_min)
+            
+            score = self.obl()
+            
             if np.min(score) < self.gBest_score:
                 self.gBest_X = self.X[score.argmin()].copy()
                 self.gBest_score = score.min().copy()
@@ -132,7 +102,7 @@ class MSEWOA():
             self.X = temp*(self.x_max - self.x_min)+self.x_min
     
     def obl(self):
-        try:
+        if self.strategy_obl:
             bound_max = np.dot(np.ones(self.num_particle)[:, np.newaxis], self.x_max[np.newaxis, :])
             bound_min = np.dot(np.ones(self.num_particle)[:, np.newaxis], self.x_min[np.newaxis, :])
             k = np.random.uniform()
@@ -146,9 +116,33 @@ class MSEWOA():
             rand_X = np.random.uniform(size=[self.num_particle, self.num_dim])*(self.x_max-self.x_min) + self.x_min
             new_X[idx_too_high] = rand_X[idx_too_high].copy()
             new_X[idx_too_low] = rand_X[idx_too_low].copy()
-        except:
-            print(666)
+            
+            self.X = np.concatenate((new_X, self.X), axis=0)        
+            score = self.fit_func(self.X)
+            top_k = score.argsort()[:self.num_particle]
+            score = score[top_k].copy()
+            self.X = self.X[top_k].copy()
+        else:
+            score = self.fit_func(self.X)
         
-        return new_X
+        return score
+    
+    def bound(self, bound_max, bound_min):
+        if self.strategy_bound==True:
+            idx_too_high = bound_max < self.X
+            idx_too_low = bound_min > self.X
+            R5 = np.random.uniform()
+            R6 = np.random.uniform()
+            bound_max_map = bound_max[idx_too_high] + \
+                            R5*bound_max[idx_too_high]*(bound_max[idx_too_high]-self.X[idx_too_high])/self.X[idx_too_high]
+            bound_min_map = bound_min[idx_too_low] + \
+                            R6*np.abs(bound_min[idx_too_low]*(bound_min[idx_too_low]-self.X[idx_too_low]))/np.abs(self.X[idx_too_low])
+            if np.any(bound_max_map==np.inf) or np.any(bound_min_map==np.inf):                   
+                print(123)
+            self.X[idx_too_high] = bound_max_map.copy()
+            self.X[idx_too_low] = bound_min_map.copy()
+        else:
+            self.X[self.X>bound_max] = bound_max[self.X>bound_max]
+            self.X[self.X<bound_min] = bound_max[self.X<bound_min]
         
         
