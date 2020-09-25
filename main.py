@@ -10,6 +10,8 @@ import numpy as np
 import time
 import pandas as pd
 
+np.random.seed(42)
+
 def Sphere(x):
     if x.ndim==1:
         x = x.reshape(1, -1)
@@ -333,7 +335,7 @@ def u_xakm(x, a, k, m):
 d = 30
 g = 500
 p = 30
-times = 5
+times = 50
 strategy_init = True
 strategy_bound = True
 strategy_obl = True
@@ -506,8 +508,8 @@ for i in range(times):
     x_max = 50*np.ones(d)
     x_min = -50*np.ones(d)
     optimizer = MSEWOA(fit_func=Generalized_Penalized01,
-                       num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                       strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
+                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
     start = time.time()
     optimizer.opt()
     end = time.time()
@@ -548,8 +550,8 @@ for i in range(times):
     x_max = 5*np.ones(4)
     x_min = -5*np.ones(4)
     optimizer = MSEWOA(fit_func=Kowalik,
-                       num_dim=4, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                       strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=4, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
+                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
     start = time.time()
     optimizer.opt()
     end = time.time()
