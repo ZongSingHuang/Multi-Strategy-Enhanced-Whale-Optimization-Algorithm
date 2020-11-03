@@ -337,9 +337,6 @@ d = 30
 g = 500
 p = 30
 times = 50
-strategy_init = True
-strategy_bound = True
-strategy_obl = True
 table = np.zeros((5, 23)) # ['avg', 'time', 'worst', 'best', 'std']
 table[2, :] = -np.ones(23)*np.inf # worst
 table[3, :] = np.ones(23)*np.inf # best
@@ -350,8 +347,7 @@ for i in range(times):
     x_max = 100*np.ones(d)
     x_min = -100*np.ones(d)
     optimizer = MSEWOA(fit_func=Sphere,
-                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
@@ -367,8 +363,7 @@ for i in range(times):
     x_max = 10*np.ones(d)
     x_min = -10*np.ones(d)
     optimizer = MSEWOA(fit_func=Schwefel_P222,
-                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
@@ -384,8 +379,7 @@ for i in range(times):
     x_max = 100*np.ones(d)
     x_min = -100*np.ones(d)
     optimizer = MSEWOA(fit_func=Quadric,
-                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
@@ -401,13 +395,12 @@ for i in range(times):
     x_max = 100*np.ones(d)
     x_min = -100*np.ones(d)
     optimizer = MSEWOA(fit_func=Schwefel_P221,
-                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 3]: table[2, 3] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 3]: table[3, 3] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 3]: table[3, 3] = optimizer.gBest_score
     table[0, 3] += optimizer.gBest_score
     table[1, 3] += end - start  
     all_for_std[i, 3] = optimizer.gBest_score
@@ -417,13 +410,12 @@ for i in range(times):
     x_max = 30*np.ones(d)
     x_min = -30*np.ones(d)
     optimizer = MSEWOA(fit_func=Rosenbrock,
-                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 4]: table[2, 4] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 4]: table[3, 4] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 4]: table[3, 4] = optimizer.gBest_score
     table[0, 4] += optimizer.gBest_score
     table[1, 4] += end - start  
     all_for_std[i, 4] = optimizer.gBest_score
@@ -434,13 +426,12 @@ for i in range(times):
     x_max = 100*np.ones(d)
     x_min = -100*np.ones(d)
     optimizer = MSEWOA(fit_func=Step,
-                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 5]: table[2, 5] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 5]: table[3, 5] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 5]: table[3, 5] = optimizer.gBest_score
     table[0, 5] += optimizer.gBest_score
     table[1, 5] += end - start
     all_for_std[i, 5] = optimizer.gBest_score
@@ -451,13 +442,12 @@ for i in range(times):
     x_max = 1.28*np.ones(d)
     x_min = -1.28*np.ones(d)
     optimizer = MSEWOA(fit_func=Quadric_Noise,
-                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 6]: table[2, 6] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 6]: table[3, 6] = optimizer.gBest_score   
+    if optimizer.gBest_score<table[3, 6]: table[3, 6] = optimizer.gBest_score
     table[0, 6] += optimizer.gBest_score
     table[1, 6] += end - start
     all_for_std[i, 6] = optimizer.gBest_score
@@ -468,13 +458,12 @@ for i in range(times):
     x_max = 500*np.ones(d)
     x_min = -500*np.ones(d)
     optimizer = MSEWOA(fit_func=Schwefel,
-                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 7]: table[2, 7] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 7]: table[3, 7] = optimizer.gBest_score   
+    if optimizer.gBest_score<table[3, 7]: table[3, 7] = optimizer.gBest_score
     table[0, 7] += optimizer.gBest_score
     table[1, 7] += end - start
     all_for_std[i, 7] = optimizer.gBest_score
@@ -485,13 +474,12 @@ for i in range(times):
     x_max = 5.12*np.ones(d)
     x_min = -5.12*np.ones(d)
     optimizer = MSEWOA(fit_func=Rastrigin,
-                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 8]: table[2, 8] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 8]: table[3, 8] = optimizer.gBest_score   
+    if optimizer.gBest_score<table[3, 8]: table[3, 8] = optimizer.gBest_score
     table[0, 8] += optimizer.gBest_score
     table[1, 8] += end - start  
     all_for_std[i, 8] = optimizer.gBest_score
@@ -502,13 +490,12 @@ for i in range(times):
     x_max = 32*np.ones(d)
     x_min = -32*np.ones(d)
     optimizer = MSEWOA(fit_func=Ackley,
-                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 9]: table[2, 9] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 9]: table[3, 9] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 9]: table[3, 9] = optimizer.gBest_score
     table[0, 9] += optimizer.gBest_score
     table[1, 9] += end - start
     all_for_std[i, 9] = optimizer.gBest_score
@@ -519,13 +506,12 @@ for i in range(times):
     x_max = 600*np.ones(d)
     x_min = -600*np.ones(d)
     optimizer = MSEWOA(fit_func=Griewank,
-                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 10]: table[2, 10] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 10]: table[3, 10] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 10]: table[3, 10] = optimizer.gBest_score
     table[0, 10] += optimizer.gBest_score
     table[1, 10] += end - start  
     all_for_std[i, 10] = optimizer.gBest_score
@@ -536,13 +522,12 @@ for i in range(times):
     x_max = 50*np.ones(d)
     x_min = -50*np.ones(d)
     optimizer = MSEWOA(fit_func=Generalized_Penalized01,
-                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 11]: table[2, 11] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 11]: table[3, 11] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 11]: table[3, 11] = optimizer.gBest_score
     table[0, 11] += optimizer.gBest_score
     table[1, 11] += end - start  
     all_for_std[i, 11] = optimizer.gBest_score
@@ -553,13 +538,12 @@ for i in range(times):
     x_max = 50*np.ones(d)
     x_min = -50*np.ones(d)
     optimizer = MSEWOA(fit_func=Generalized_Penalized02,
-                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=d, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 12]: table[2, 12] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 12]: table[3, 12] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 12]: table[3, 12] = optimizer.gBest_score
     table[0, 12] += optimizer.gBest_score
     table[1, 12] += end - start  
     all_for_std[i, 12] = optimizer.gBest_score
@@ -570,13 +554,12 @@ for i in range(times):
     x_max = 65.536*np.ones(2)
     x_min = -65.536*np.ones(2)
     optimizer = MSEWOA(fit_func=DE_JONG_N5,
-                        num_dim=2, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=2, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 13]: table[2, 13] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 13]: table[3, 13] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 13]: table[3, 13] = optimizer.gBest_score
     table[0, 13] += optimizer.gBest_score
     table[1, 13] += end - start  
     all_for_std[i, 13] = optimizer.gBest_score
@@ -587,13 +570,12 @@ for i in range(times):
     x_max = 5*np.ones(4)
     x_min = -5*np.ones(4)
     optimizer = MSEWOA(fit_func=Kowalik,
-                        num_dim=4, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=4, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 14]: table[2, 14] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 14]: table[3, 14] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 14]: table[3, 14] = optimizer.gBest_score
     table[0, 14] += optimizer.gBest_score
     table[1, 14] += end - start  
     all_for_std[i, 14] = optimizer.gBest_score
@@ -604,13 +586,12 @@ for i in range(times):
     x_max = 5*np.ones(2)
     x_min = -5*np.ones(2)
     optimizer = MSEWOA(fit_func=Six_Hump_Camel,
-                        num_dim=2, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=2, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 15]: table[2, 15] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 15]: table[3, 15] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 15]: table[3, 15] = optimizer.gBest_score
     table[0, 15] += optimizer.gBest_score
     table[1, 15] += end - start  
     all_for_std[i, 15] = optimizer.gBest_score
@@ -621,13 +602,12 @@ for i in range(times):
     x_max = 5*np.ones(2)
     x_min = -5*np.ones(2)
     optimizer = MSEWOA(fit_func=Brain,
-                        num_dim=2, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=2, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 16]: table[2, 16] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 16]: table[3, 16] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 16]: table[3, 16] = optimizer.gBest_score
     table[0, 16] += optimizer.gBest_score
     table[1, 16] += end - start  
     all_for_std[i, 16] = optimizer.gBest_score
@@ -638,13 +618,12 @@ for i in range(times):
     x_max = 2*np.ones(2)
     x_min = -2*np.ones(2)
     optimizer = MSEWOA(fit_func=Goldstein_Price,
-                        num_dim=2, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=2, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 17]: table[2, 17] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 17]: table[3, 17] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 17]: table[3, 17] = optimizer.gBest_score
     table[0, 17] += optimizer.gBest_score
     table[1, 17] += end - start  
     all_for_std[i, 17] = optimizer.gBest_score
@@ -655,13 +634,12 @@ for i in range(times):
     x_max = 1*np.ones(3)
     x_min = 0*np.ones(3)
     optimizer = MSEWOA(fit_func=Hartmann_3D,
-                        num_dim=3, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=3, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 18]: table[2, 18] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 18]: table[3, 18] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 18]: table[3, 18] = optimizer.gBest_score
     table[0, 18] += optimizer.gBest_score
     table[1, 18] += end - start  
     all_for_std[i, 18] = optimizer.gBest_score
@@ -672,13 +650,12 @@ for i in range(times):
     x_max = 1*np.ones(6)
     x_min = 0*np.ones(6)
     optimizer = MSEWOA(fit_func=Hartmann_6D,
-                        num_dim=6, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=6, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 19]: table[2, 19] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 19]: table[3, 19] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 19]: table[3, 19] = optimizer.gBest_score
     table[0, 19] += optimizer.gBest_score
     table[1, 19] += end - start  
     all_for_std[i, 19] = optimizer.gBest_score
@@ -689,13 +666,12 @@ for i in range(times):
     x_max = 10*np.ones(4)
     x_min = 0*np.ones(4)
     optimizer = MSEWOA(fit_func=Shekel_m5,
-                        num_dim=4, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=4, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 20]: table[2, 20] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 20]: table[3, 20] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 20]: table[3, 20] = optimizer.gBest_score
     table[0, 20] += optimizer.gBest_score
     table[1, 20] += end - start  
     all_for_std[i, 20] = optimizer.gBest_score
@@ -706,13 +682,12 @@ for i in range(times):
     x_max = 10*np.ones(4)
     x_min = 0*np.ones(4)
     optimizer = MSEWOA(fit_func=Shekel_m7,
-                        num_dim=4, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=4, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 21]: table[2, 21] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 21]: table[3, 21] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 21]: table[3, 21] = optimizer.gBest_score
     table[0, 21] += optimizer.gBest_score
     table[1, 21] += end - start  
     all_for_std[i, 21] = optimizer.gBest_score
@@ -723,13 +698,12 @@ for i in range(times):
     x_max = 10*np.ones(4)
     x_min = 0*np.ones(4)
     optimizer = MSEWOA(fit_func=Shekel_m10,
-                        num_dim=4, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min,
-                        strategy_init=strategy_init, strategy_bound=strategy_bound, strategy_obl=strategy_obl)
+                        num_dim=4, num_particle=p, max_iter=g, x_max=x_max, x_min=x_min)
     start = time.time()
     optimizer.opt()
     end = time.time()
     if optimizer.gBest_score>table[2, 22]: table[2, 22] = optimizer.gBest_score
-    if optimizer.gBest_score<table[3, 22]: table[3, 22] = optimizer.gBest_score  
+    if optimizer.gBest_score<table[3, 22]: table[3, 22] = optimizer.gBest_score
     table[0, 22] += optimizer.gBest_score
     table[1, 22] += end - start  
     all_for_std[i, 22] = optimizer.gBest_score
