@@ -91,8 +91,7 @@ class MSEWOA():
         plt.show()
 
     def chaotic(self):
-        # # Chebyshev 
-        # # https://www.mathworks.com/matlabcentral/fileexchange/47215-chaos-theory-and-meta-heuristics?s_tid=mwa_osa_a
+        # # Chebyshev (17) Shit
         # init_X = np.random.uniform(low=-1.0, high=1.0, size=[1, self.num_dim])
         # self.X = np.zeros((self.num_particle, self.num_dim))
         # for i in range(self.num_particle):
@@ -103,7 +102,7 @@ class MSEWOA():
         # self.X = (self.X+1) / 2
         # self.X = self.X*(self.x_max-self.x_min) + self.x_min
         
-        # # Circle
+        # # Circle (11)
         # a = 0.5
         # b = 0.2
         # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
@@ -115,7 +114,7 @@ class MSEWOA():
         #     print(1)
         # self.X = self.X*(self.x_max-self.x_min) + self.x_min
         
-        # # Gauss/mouse
+        # # Gauss/mouse (25) Shit
         # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
         # self.X = np.zeros((self.num_particle, self.num_dim))
         # for i in range(self.num_particle):
@@ -128,7 +127,7 @@ class MSEWOA():
         #     print(2)
         # self.X = self.X*(self.x_max-self.x_min) + self.x_min
         
-        # # Iterative
+        # # Iterative (12)
         # a = 0.7
         # init_X = np.random.uniform(low=-1.0, high=1.0, size=[1, self.num_dim])
         # self.X = np.zeros((self.num_particle, self.num_dim))
@@ -140,7 +139,7 @@ class MSEWOA():
         # self.X = (self.X+1) / 2
         # self.X = self.X*(self.x_max-self.x_min) + self.x_min
         
-        # # Logistic
+        # # Logistic (5) No3
         # a = 4
         # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
         # self.X = np.zeros((self.num_particle, self.num_dim))
@@ -151,7 +150,7 @@ class MSEWOA():
         #     print(4)
         # self.X = self.X*(self.x_max-self.x_min) + self.x_min
         
-        # # Piecewise
+        # # Piecewise (21) Shit
         # P = 0.4
         # init_X = np.random.uniform(low=0.0, high=1.0, size=[self.num_dim])
         # self.X = np.zeros((self.num_particle, self.num_dim))
@@ -172,7 +171,7 @@ class MSEWOA():
         #     print(5)
         # self.X = self.X*(self.x_max-self.x_min) + self.x_min
         
-        # # Sine
+        # # Sine (13)
         # a = 4
         # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
         # self.X = np.zeros((self.num_particle, self.num_dim))
@@ -183,7 +182,7 @@ class MSEWOA():
         #     print(6)
         # self.X = self.X*(self.x_max-self.x_min) + self.x_min
         
-        # # Singer
+        # # Singer (17) Shit
         # u = 1.07
         # while(True):
         #     init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
@@ -197,7 +196,7 @@ class MSEWOA():
         #     print(7)
         # self.X = self.X*(self.x_max-self.x_min) + self.x_min
         
-        # # Sinusoidal
+        # # Sinusoidal (13)
         # a = 2.3
         # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
         # self.X = np.zeros((self.num_particle, self.num_dim))
@@ -208,7 +207,7 @@ class MSEWOA():
         #     print(8)
         # self.X = self.X*(self.x_max-self.x_min) + self.x_min
         
-        # Tent
+        # Tent (3) No1
         init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
         self.X = np.zeros((self.num_particle, self.num_dim))
         for i in range(self.num_particle):
@@ -221,7 +220,7 @@ class MSEWOA():
             print(9)
         self.X = self.X*(self.x_max-self.x_min) + self.x_min
 
-        # # range [-1, 1]
+        # # Paper (14)
         # init_X = np.random.uniform(low=-1.0, high=1.0, size=[1, self.num_dim])
         # self.X = np.zeros((self.num_particle, self.num_dim))
         # for i in range(self.num_particle):
@@ -232,7 +231,7 @@ class MSEWOA():
         # self.X = (self.X+1) / 2
         # self.X = self.X*(self.x_max-self.x_min) + self.x_min
         
-        # Random
+        # # Random (2) No 2
         # self.X = np.random.uniform(low=self.x_min, high=self.x_max, size=[self.num_particle, self.num_dim])
 
 
