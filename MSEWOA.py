@@ -88,125 +88,7 @@ class MSEWOA():
         plt.legend()
         plt.show()
 
-    def chaotic(self):
-        # # Chebyshev (17) Shit
-        # init_X = np.random.uniform(low=-1.0, high=1.0, size=[1, self.num_dim])
-        # self.X = np.zeros((self.num_particle, self.num_dim))
-        # for i in range(self.num_particle):
-        #     self.X[i] = init_X
-        #     init_X = np.cos((i+1)*np.arccos(init_X))
-        # self.X = (self.X+1) / 2
-        # self.X = self.X*(self.x_max-self.x_min) + self.x_min
-        
-        # Circle (11)
-        a = 0.5
-        b = 0.2
-        init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
-        self.X = np.zeros((self.num_particle, self.num_dim))
-        for i in range(self.num_particle):
-            self.X[i] = init_X
-            init_X = np.mod(init_X+b-(a/(2*np.pi))*np.sin(2*np.pi*init_X), 1)
-        self.X = self.X*(self.x_max-self.x_min) + self.x_min
-        
-        # # Gauss/mouse (25) Shit
-        # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
-        # self.X = np.zeros((self.num_particle, self.num_dim))
-        # for i in range(self.num_particle):
-        #     self.X[i] = init_X
-        #     flag1 = init_X==0
-        #     flag2 = init_X!=0
-        #     init_X[flag1] = 1
-        #     init_X[flag2] = np.mod(1/init_X[flag2], 1)
-        # self.X = self.X*(self.x_max-self.x_min) + self.x_min
-        
-        # # Iterative (12)
-        # a = 0.7
-        # init_X = np.random.uniform(low=-1.0, high=1.0, size=[1, self.num_dim])
-        # self.X = np.zeros((self.num_particle, self.num_dim))
-        # for i in range(self.num_particle):
-        #     self.X[i] = init_X
-        #     init_X = np.sin(a*np.pi/init_X)
-        # self.X = (self.X+1) / 2
-        # self.X = self.X*(self.x_max-self.x_min) + self.x_min
-        
-        # # Logistic (5) No3
-        # a = 4
-        # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
-        # self.X = np.zeros((self.num_particle, self.num_dim))
-        # for i in range(self.num_particle):
-        #     self.X[i] = init_X
-        #     init_X = a*init_X*(1-init_X)
-        # self.X = self.X*(self.x_max-self.x_min) + self.x_min
-        
-        # # Piecewise (21) Shit
-        # P = 0.4
-        # init_X = np.random.uniform(low=0.0, high=1.0, size=[self.num_dim])
-        # self.X = np.zeros((self.num_particle, self.num_dim))
-        # for i in range(self.num_particle):
-        #     self.X[i] = init_X
-        #     for j in range(init_X.shape[0]):
-        #         if 0<=init_X[j] and init_X[j]<P:
-        #             init_X[j] = init_X[j]/P
-        #         elif P<=init_X[j] and init_X[j]<0.5:
-        #             init_X[j] = (init_X[j]-P)/(0.5-P)
-        #         elif 0.5<=init_X[j] and init_X[j]<1-P:
-        #             init_X[j] = (1-P-init_X[j])/(0.5-P)
-        #         elif 1-P<=init_X[j] and init_X[j]<1:
-        #             init_X[j] = (1-init_X[j])/P
-        # self.X = self.X*(self.x_max-self.x_min) + self.x_min
-        
-        # # Sine (13)
-        # a = 4
-        # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
-        # self.X = np.zeros((self.num_particle, self.num_dim))
-        # for i in range(self.num_particle):
-        #     self.X[i] = init_X
-        #     init_X = (a/4)*np.sin(np.pi*init_X)
-        # self.X = self.X*(self.x_max-self.x_min) + self.x_min
-        
-        # # Singer (17) Shit
-        # u = 1.07
-        # while(True):
-        #     init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
-        #     if len(np.where(init_X>0.999)[0])==0:
-        #         break
-        # self.X = np.zeros((self.num_particle, self.num_dim))
-        # for i in range(self.num_particle):
-        #     self.X[i] = init_X
-        #     init_X = u*(7.86*init_X-23.31*init_X**2+28.75*init_X**3-13.302875*init_X**4)
-        # self.X = self.X*(self.x_max-self.x_min) + self.x_min
-        
-        # # Sinusoidal (13)
-        # a = 2.3
-        # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
-        # self.X = np.zeros((self.num_particle, self.num_dim))
-        # for i in range(self.num_particle):
-        #     self.X[i] = init_X
-        #     init_X = a*init_X**2 * np.sin(np.pi*init_X)
-        # self.X = self.X*(self.x_max-self.x_min) + self.x_min
-        
-        # # Tent (3) No1
-        # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
-        # self.X = np.zeros((self.num_particle, self.num_dim))
-        # for i in range(self.num_particle):
-        #     self.X[i] = init_X
-        #     bigger = init_X>=0.7
-        #     smaller = init_X<0.7
-        #     init_X[bigger] = (10/3)*(1-init_X[bigger])
-        #     init_X[smaller] = init_X[smaller]/0.7
-        # self.X = self.X*(self.x_max-self.x_min) + self.x_min
-
-        # # Paper (14)
-        # init_X = np.random.uniform(low=-1.0, high=1.0, size=[1, self.num_dim])
-        # self.X = np.zeros((self.num_particle, self.num_dim))
-        # for i in range(self.num_particle):
-        #     self.X[i] = init_X
-        #     init_X = 1 - 2*( np.cos( 4*np.arccos(init_X) ) )**2 # (8)
-        # self.X = (self.X+1) / 2
-        # self.X = self.X*(self.x_max-self.x_min) + self.x_min
-        
-        # # Random (2) No 2
-        # self.X = np.random.uniform(low=self.x_min, high=self.x_max, size=[self.num_particle, self.num_dim])
+    
 
 
 
@@ -254,3 +136,123 @@ class MSEWOA():
 
         idx_too_high = self.x_max < self.X
         idx_too_low = self.x_min > self.X
+
+    def chaotic(self):
+            # # Chebyshev (12) Shit
+            # init_X = np.random.uniform(low=-1.0, high=1.0, size=[1, self.num_dim])
+            # self.X = np.zeros((self.num_particle, self.num_dim))
+            # for i in range(self.num_particle):
+            #     self.X[i] = init_X
+            #     init_X = np.cos((i+1)*np.arccos(init_X))
+            # self.X = (self.X+1) / 2
+            # self.X = self.X*(self.x_max-self.x_min) + self.x_min
+            
+            # # Circle (9)
+            # a = 0.5
+            # b = 0.2
+            # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
+            # self.X = np.zeros((self.num_particle, self.num_dim))
+            # for i in range(self.num_particle):
+            #     self.X[i] = init_X
+            #     init_X = np.mod(init_X+b-(a/(2*np.pi))*np.sin(2*np.pi*init_X), 1)
+            # self.X = self.X*(self.x_max-self.x_min) + self.x_min
+            
+            # # Gauss/mouse (25) Shit
+            # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
+            # self.X = np.zeros((self.num_particle, self.num_dim))
+            # for i in range(self.num_particle):
+            #     self.X[i] = init_X
+            #     flag1 = init_X==0
+            #     flag2 = init_X!=0
+            #     init_X[flag1] = 1
+            #     init_X[flag2] = np.mod(1/init_X[flag2], 1)
+            # self.X = self.X*(self.x_max-self.x_min) + self.x_min
+            
+            # # Iterative (13)
+            # a = 0.7
+            # init_X = np.random.uniform(low=-1.0, high=1.0, size=[1, self.num_dim])
+            # self.X = np.zeros((self.num_particle, self.num_dim))
+            # for i in range(self.num_particle):
+            #     self.X[i] = init_X
+            #     init_X = np.sin(a*np.pi/init_X)
+            # self.X = (self.X+1) / 2
+            # self.X = self.X*(self.x_max-self.x_min) + self.x_min
+            
+            # # Logistic (5) No3
+            # a = 4
+            # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
+            # self.X = np.zeros((self.num_particle, self.num_dim))
+            # for i in range(self.num_particle):
+            #     self.X[i] = init_X
+            #     init_X = a*init_X*(1-init_X)
+            # self.X = self.X*(self.x_max-self.x_min) + self.x_min
+            
+            # # Piecewise (23) Shit
+            # P = 0.4
+            # init_X = np.random.uniform(low=0.0, high=1.0, size=[self.num_dim])
+            # self.X = np.zeros((self.num_particle, self.num_dim))
+            # for i in range(self.num_particle):
+            #     self.X[i] = init_X
+            #     for j in range(init_X.shape[0]):
+            #         if 0<=init_X[j] and init_X[j]<P:
+            #             init_X[j] = init_X[j]/P
+            #         elif P<=init_X[j] and init_X[j]<0.5:
+            #             init_X[j] = (init_X[j]-P)/(0.5-P)
+            #         elif 0.5<=init_X[j] and init_X[j]<1-P:
+            #             init_X[j] = (1-P-init_X[j])/(0.5-P)
+            #         elif 1-P<=init_X[j] and init_X[j]<1:
+            #             init_X[j] = (1-init_X[j])/P
+            # self.X = self.X*(self.x_max-self.x_min) + self.x_min
+            
+            # # Sine (13)
+            # a = 4
+            # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
+            # self.X = np.zeros((self.num_particle, self.num_dim))
+            # for i in range(self.num_particle):
+            #     self.X[i] = init_X
+            #     init_X = (a/4)*np.sin(np.pi*init_X)
+            # self.X = self.X*(self.x_max-self.x_min) + self.x_min
+            
+            # # Singer (17) Shit
+            # u = 1.07
+            # while(True):
+            #     init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
+            #     if len(np.where(init_X>0.999)[0])==0:
+            #         break
+            # self.X = np.zeros((self.num_particle, self.num_dim))
+            # for i in range(self.num_particle):
+            #     self.X[i] = init_X
+            #     init_X = u*(7.86*init_X-23.31*init_X**2+28.75*init_X**3-13.302875*init_X**4)
+            # self.X = self.X*(self.x_max-self.x_min) + self.x_min
+            
+            # # Sinusoidal (13)
+            # a = 2.3
+            # init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
+            # self.X = np.zeros((self.num_particle, self.num_dim))
+            # for i in range(self.num_particle):
+            #     self.X[i] = init_X
+            #     init_X = a*init_X**2 * np.sin(np.pi*init_X)
+            # self.X = self.X*(self.x_max-self.x_min) + self.x_min
+            
+            # Tent (3) No1
+            init_X = np.random.uniform(low=0.0, high=1.0, size=[1, self.num_dim])
+            self.X = np.zeros((self.num_particle, self.num_dim))
+            for i in range(self.num_particle):
+                self.X[i] = init_X
+                bigger = init_X>=0.7
+                smaller = init_X<0.7
+                init_X[bigger] = (10/3)*(1-init_X[bigger])
+                init_X[smaller] = init_X[smaller]/0.7
+            self.X = self.X*(self.x_max-self.x_min) + self.x_min
+    
+            # # Paper (16)
+            # init_X = np.random.uniform(low=-1.0, high=1.0, size=[1, self.num_dim])
+            # self.X = np.zeros((self.num_particle, self.num_dim))
+            # for i in range(self.num_particle):
+            #     self.X[i] = init_X
+            #     init_X = 1 - 2*( np.cos( 4*np.arccos(init_X) ) )**2 # (8)
+            # self.X = (self.X+1) / 2
+            # self.X = self.X*(self.x_max-self.x_min) + self.x_min
+            
+            # # Random (4) No 2
+            # self.X = np.random.uniform(low=self.x_min, high=self.x_max, size=[self.num_particle, self.num_dim])
