@@ -120,7 +120,7 @@ def F13(x):
             (x[ : dim - 1] - 1) ** 2
             * (1 + (numpy.sin(3 * math.pi * x[1 : ])) ** 2)
         )
-        + (x[dim - 1] - 1) * (1 + (numpy.sin(2 * math.pi * x[dim - 1])) ** 2)
+        + (x[dim - 1] - 1)**2 * (1 + (numpy.sin(2 * math.pi * x[dim - 1])) ** 2)
     ) + numpy.sum(Ufun(x, 5, 100, 4))
     return o
 
@@ -278,7 +278,7 @@ def F21(L):
     aSH = numpy.asarray(aSH)
     cSH = numpy.asarray(cSH)
     fit = 0
-    for i in range(0, 4):
+    for i in range(5):
         v = numpy.matrix(L - aSH[i, :])
         fit = fit - ((v) * (v.T) + cSH[i]) ** (-1)
     o = fit.item(0)
@@ -302,7 +302,7 @@ def F22(L):
     aSH = numpy.asarray(aSH)
     cSH = numpy.asarray(cSH)
     fit = 0
-    for i in range(0, 6):
+    for i in range(7):
         v = numpy.matrix(L - aSH[i, :])
         fit = fit - ((v) * (v.T) + cSH[i]) ** (-1)
     o = fit.item(0)
@@ -326,7 +326,7 @@ def F23(L):
     aSH = numpy.asarray(aSH)
     cSH = numpy.asarray(cSH)
     fit = 0
-    for i in range(0, 9):
+    for i in range(10):
         v = numpy.matrix(L - aSH[i, :])
         fit = fit - ((v) * (v.T) + cSH[i]) ** (-1)
     o = fit.item(0)

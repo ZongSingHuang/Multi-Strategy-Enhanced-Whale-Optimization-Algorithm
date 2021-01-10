@@ -131,7 +131,7 @@ def F13(x):
                  ( 
                    np.sin(3*np.pi*x[:, 0])**2 +
                    np.sum((x[:, :-1]-1)**2*(1+np.sin(3*np.pi*x[:, 1:])**2), axis=1) +
-                   (x[:, -1]-1)*(1+np.sin(2*np.pi*x[:, -1])**2)
+                   (x[:, -1]-1)**2*(1+np.sin(2*np.pi*x[:, -1])**2)
                   ) \
                + u_xakm(x, 5, 100, 4)
 
@@ -165,7 +165,7 @@ def F14(x):
     
     return fitness
 
-def F15(x):
+def vF15(x):
     if x.ndim==1:
         x = x.reshape(1, -1)
         
@@ -180,26 +180,26 @@ def F15(x):
     
     return fitness
 
-def F16(x):
+def vF16(x):
     if x.ndim==1:
         x = x.reshape(1, -1)
         
     return 4*(x[:, 0]**2)-2.1*(x[:, 0]**4)+(x[:, 0]**6)/3+x[:, 0]*x[:, 1]-4*(x[:, 1]**2)+4*(x[:, 1]**4)
 
-def F17(x):
+def vF17(x):
     if x.ndim==1:
         x = x.reshape(1, -1)
         
     return (x[:, 1]-(x[:, 0]**2)*5.1/(4*(np.pi**2))+5/np.pi*x[:, 0]-6)**2+10*(1-1/(8*np.pi))*np.cos(x[:, 0])+10
 
-def F18(x):
+def vF18(x):
     if x.ndim==1:
         x = x.reshape(1, -1)
         
     return (1+(x[:, 0]+x[:, 1]+1)**2*(19-14*x[:, 0]+3*(x[:, 0]**2)-14*x[:, 1]+6*x[:, 0]*x[:, 1]+3*x[:, 1]**2))* \
     (30+(2*x[:, 0]-3*x[:, 1])**2*(18-32*x[:, 0]+12*(x[:, 0]**2)+48*x[:, 1]-36*x[:, 0]*x[:, 1]+27*(x[:, 1]**2)))
 
-def F19(x):
+def vF19(x):
     if x.ndim==1:
         x = x.reshape(1, -1)
         
@@ -224,7 +224,7 @@ def F19(x):
     
     return fitness
 
-def F20(x):
+def vF20(x):
     if x.ndim==1:
         x = x.reshape(1, -1)
         
@@ -249,7 +249,31 @@ def F20(x):
     
     return fitness
 
-def F21(x):
+def vF21(x):
+    return Shekel(x, m=5)
+
+
+def vF22(x):
+    return Shekel(x, m=7)
+
+def vF23(x):
+    return Shekel(x, m=10)
+
+def u_xakm(x, a, k, m):
+    if x.ndim==1:
+        x = x.reshape(1, -1)
+    temp = x.copy()    
+    
+    case1 = x>a
+    case3 = x<-a
+    
+    temp = np.zeros_like(x)
+    temp[case1] = k*(x[case1]-a)**m         
+    temp[case3] = k*(-1*x[case3]-a)**m
+    
+    return np.sum(temp, axis=1)
+
+def Shekel(x, m=10):
     if x.ndim==1:
         x = x.reshape(1, -1)
         
@@ -267,68 +291,10 @@ def F21(x):
     
     fitness = np.zeros(x.shape[0])
     for i in range(x.shape[0]):
-        for j in range(5):
-            fitness[i] = fitness[i] - 1/(np.dot((x[i, :]-aSH[j, :]), (x[i, :]-aSH[j,:]).T)+cSH[j])
+        for j in range(m):
+            fitness[i] = fitness[i] - 1/(np.sum((x[i, :]-aSH[j, :])**2)+cSH[j])
+    
     return fitness
-
-
-def F22(x):
-    if x.ndim==1:
-        x = x.reshape(1, -1)
-        
-    aSH = np.array([[4, 4, 4, 4], 
-                    [1, 1, 1, 1], 
-                    [8, 8, 8, 8],
-                    [6, 6, 6, 6],
-                    [3, 7, 3, 7],
-                    [2, 9, 2, 9],
-                    [5, 5, 3, 3],
-                    [8, 1, 8, 1],
-                    [6, 2, 6, 2],
-                    [7, 3.6, 7, 3.6]])
-    cSH=np.array([.1, .2, .2, .4, .4, .6, .3, .7, .5, .5])
-    
-    fitness = np.zeros(x.shape[0])
-    for i in range(x.shape[0]):    
-        for j in range(7):
-            fitness[i] = fitness[i] - 1/(np.dot((x[i, :]-aSH[j, :]), (x[i, :]-aSH[j,:]).T)+cSH[j])
-    return fitness
-
-def F23(x):
-    if x.ndim==1:
-        x = x.reshape(1, -1)
-        
-    aSH = np.array([[4, 4, 4, 4], 
-                    [1, 1, 1, 1], 
-                    [8, 8, 8, 8],
-                    [6, 6, 6, 6],
-                    [3, 7, 3, 7],
-                    [2, 9, 2, 9],
-                    [5, 5, 3, 3],
-                    [8, 1, 8, 1],
-                    [6, 2, 6, 2],
-                    [7, 3.6, 7, 3.6]])
-    cSH=np.array([.1, .2, .2, .4, .4, .6, .3, .7, .5, .5])
-
-    fitness = np.zeros(x.shape[0])
-    for i in range(x.shape[0]):  
-        for j in range(10):
-            fitness[i] = fitness[i] - 1/(np.dot((x[i, :]-aSH[j, :]), (x[i, :]-aSH[j,:]).T)+cSH[j])
-    return fitness
-
-def u_xakm(x, a, k, m):
-    if x.ndim==1:
-        x = x.reshape(1, -1)
-    temp = x.copy()    
-    
-    case1 = x>a
-    case3 = x<-a
-    
-    temp = np.zeros_like(x)
-    temp[case1] = k*(x[case1]-a)**m         
-    temp[case3] = k*(-1*x[case3]-a)**m
-    
-    return np.sum(temp, axis=1)
     
 
 
