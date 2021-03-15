@@ -10,10 +10,8 @@ Main reference:https://www.mdpi.com/2076-3417/10/11/3667
 Main reference:http://www.ejournal.org.cn/EN/abstract/abstract11643.shtml#
 """
 
-import math
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import MinMaxScaler
 
 np.random.seed(42)
 
@@ -254,5 +252,5 @@ class MSEWOA():
             # self.X = (self.X+1) / 2
             # self.X = self.X*(self.x_max-self.x_min) + self.x_min
             
-            # # Random (4) No 2
-            # self.X = np.random.uniform(low=self.x_min, high=self.x_max, size=[self.num_particle, self.num_dim])
+            # Random (4) No 2
+            self.X = np.random.uniform(low=self.x_min, high=self.x_max, size=[self.num_particle, self.num_dim])
